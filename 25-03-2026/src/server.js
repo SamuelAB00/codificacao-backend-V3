@@ -1,21 +1,13 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Valeu gurizada!')
-})
+const moviesRoutes = require('./routes/movies.routes');
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+app.use(express.json());
+app.use('/movies', moviesRoutes);
 
-const frutas = require("../mocks/frutas.mock");
+const PORT = 3000;
 
-function buscarFrutaPorId(id) {
-  return frutas.find(fruta => fruta.id === id);
-}
-
-module.exports = {
-  buscarFrutaPorId
-};
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
